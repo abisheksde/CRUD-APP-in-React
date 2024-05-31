@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import react , { useState } from 'react';
+import Navbar from './components/Navbar';
+import Axios from 'axios';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  var options = {
+    headers: {'Accept':'application/json'}
+  }
+  Axios.get('https://demo-blog.mashupstack.com/api/posts',options).then(response=>{
+      // statements to execute on success response from api endpoint
+      console.log(response.data)
+  }).catch(error=>{
+      // statements to execute on error response from api endpoint
+      console.log(error)
+  })
+  return(
+  <div>
+    <Navbar/>
+    <p>Home component </p>
+  </div>
+);
 }
 
 export default App;
