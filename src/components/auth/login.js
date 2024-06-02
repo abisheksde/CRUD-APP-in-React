@@ -1,21 +1,31 @@
+import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setUser } from "../store/authSlice";
 import Navbar from "../Navbar";
-import Axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 function Login() {
     var [email, setEmail] = useState('');
     var [password, setPassword] = useState('');
     var [errorMessage, setErrorMessage] = useState('');
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     function attemptLogin() {
-        Axios.post('https://demo-blog.mashupstack.com/api/login',{
+        axios.post('https://demo-blog.mashupstack.com/api/login',{
             email:email,
             password:password
         }).then(response=>{
             setErrorMessage('')
-            console.log(response.data.token)
+            var user = {
+                email:email,
+                token:response.data.token
+            }
+            dispatch(setUser(user));
+    navigate("/");
         }).catch(error=>{
             if(error.response.data.errors){
-                setErrorMessage(Object.values(error.response.data.errors).join(' '))
+                setErrorMessage(Object.values(error.response.data.errors).join(''))
             }else if(error.response.data.message){
                 setErrorMessage(error.response.data.message)
             }else{
@@ -23,8 +33,6 @@ function Login() {
             }
         })
     }
-
-
     return (<div>
         <Navbar/>
         <div className="container">
