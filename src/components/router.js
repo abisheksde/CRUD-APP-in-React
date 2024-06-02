@@ -7,6 +7,8 @@ import ListPosts from "./blog/Listpost";
 import CreatePost from "./blog/Createpost";
 import ViewPost from "./blog/Viewpost";
 import EditPost from "./blog/Editpost";
+import Register from "./auth/register";
+import Login from "./auth/login";
 
 
 const router = createBrowserRouter([
@@ -17,7 +19,9 @@ const router = createBrowserRouter([
     { path: 'blog/posts', element: <ListPosts/>},
     { path : 'blog/posts/create' , element : <CreatePost/> },
     { path: 'blog/posts/:postId', element: <ViewPost/>},
-    { path : '/blog/posts/:postId/edit', element: <EditPost/>}
+    { path : '/blog/posts/:postId/edit', element: <EditPost/>},
+    { path: 'register', element:<Register/>},
+    { path: 'login', element:<Login/>},
 
 ]);
 
