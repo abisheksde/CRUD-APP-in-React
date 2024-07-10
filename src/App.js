@@ -8,6 +8,7 @@ function App() {
   }
   Axios.get('https://demo-blog.mashupstack.com/api/posts',options).then(response=>{
       // statements to execute on success response from api endpoint
+      //
       console.log(response.data)
   }).catch(error=>{
       // statements to execute on error response from api endpoint
